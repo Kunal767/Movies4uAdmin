@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Pushster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap');
+
+.mainentrancejumbo .display-4{
+    font-family: 'Pushster', cursive;
+}
+
+.mainentrancejumbo{
+    padding: 50px;
+}
+
+.description-text{
+    width: 200px;
+    word-wrap: break-word;
+}
+
+.table{
+    text-align: center;
+}
+
+i{
+    background-color: transparent;
+    margin-right: 5px;
+}
+
+.addbtn{
+    margin: 20px;
+}
+
+.addbtn a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+}
+
+.addform label{
+    font-family: 'Dongle', sans-serif;
+    font-size: 30px;
+}
+
+.add-form-object{
+    margin-bottom: 20px;
+}
+
+.mainhead{
+    font-family: 'Dongle', sans-serif;
+    font-size: 50px;
+}
+
+.submitbtn{
+    margin-bottom: 50px;
+}
+
+.submitbtn button{
+    margin-top: 10px;
+}
+
+.display-4 a{
+    text-decoration: none;
+    color: rgb(188, 221, 0);
+}
+
+.display-4 a:hover{
+    color: violet;
+}
+
+.lead a{
+    color: tomato;
+    text-decoration: none;
+}
+
+.lead a:hover{
+    color: rgb(109, 21, 5);
+}
+
+.dtext{
+    width: 400px;
+    word-wrap: break-word;
+}
+
+.modelbodytext{
+    font-family: 'Dongle', sans-serif;
+    font-size: 30px;
+    text-align: center;
+}

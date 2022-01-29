@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mainselect">
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="mainhead">Edit File</h2>
+        </div>
+
+        <form action="/edit_file/{{ id }}" method="POST" class="addform">
+
+            <div class="form-group add-form-object">
+                <label for="linktext">Link Text</label>
+                <input type="text" class="form-control" id="linktext"
+                    value="{{ file.linkSpec }}" name="linkText"
+                    placeholder="Link Text">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="downloadtext">Download Button Text</label>
+                <input type="text" class="form-control" id="downloadtext" name="downloadText" value="{{ file.downloadText }}"
+                    placeholder="Download Button Text">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="downloadlink">Download Button Link</label>
+                <input type="text" class="form-control" id="downloadlink" name="downloadLink" value="{{ file.downloadLink }}"
+                    placeholder="Download Button Link">
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-warning" type="submit">Save File</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

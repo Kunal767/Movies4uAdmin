@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+<div class="mainselect">
+    <div class="container">
+
+        <div class="addbtn float-end">
+            <button class="btn btn-outline-success"><a href="/add-content"><i class="fa fa-plus-circle"></i> Add
+                    Content</a></button>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Content Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td class="description-text">{{ details.description[:60] }}...</td>
+                    <td>{{ details.movieInfo.Language }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Content Image"></td>
+                    <td><a href="/editcontent/{{ id }}" class="btn btn-outline-info">Edit Content</a></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                            data-bs-target="#deleteContentModel{{ id }}">Delete Content</button></td>
+
+                    <div class="modal fade" id="deleteContentModel{{ id }}" tabindex="-1"
+                        aria-labelledby="deleteContentModel{{ id }}Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteContentModel{{ id }}Title">Permanently Delete
+                                        Content</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="modelbodytext">Are you sure want to permanently delete this content? This
+                                        action cannot be reversed.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <a href="/deletecontent/{{ id }}" class="btn btn-outline-primary">Delete Content</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

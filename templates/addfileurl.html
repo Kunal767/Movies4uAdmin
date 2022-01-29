@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mainselect">
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="mainhead">Add File</h2>
+        </div>
+
+        <form action="/add_file" method="POST" class="addform">
+
+            {% if movie == True %}
+
+            <div class="form-group add-form-object">
+                <label for="linktext">Link Text</label>
+                <input type="text" class="form-control" id="linktext"
+                    value="Download {{ temp_content.ctitle }}  {{ temp_content.lang }}" name="linkText"
+                    placeholder="Link Text">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="downloadtext">Download Button Text</label>
+                <input type="text" class="form-control" id="downloadtext" name="downloadText" value="Download Now "
+                    placeholder="Download Button Text">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="downloadlink">Download Button Link</label>
+                <input type="text" class="form-control" id="downloadlink" name="downloadLink"
+                    placeholder="Download Button Link">
+            </div>
+
+            {% elif webseries == True %}
+
+            <div class="form-group add-form-object">
+                <label for="linktext">Link Text</label>
+                <input type="text" class="form-control" id="linktext" value="Download {{ temp_content.ctitle }} Season  {{ temp_content.lang }}" name="linkText"
+                    placeholder="Link Text">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="downloadtext">Download Button Text</label>
+                <input type="text" class="form-control" id="downloadtext" name="downloadText" value="Download Season  Now "
+                    placeholder="Download Button Text">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="downloadlink">Download Button Link</label>
+                <input type="text" class="form-control" id="downloadlink" name="downloadLink"
+                    placeholder="Download Button Link">
+            </div>
+
+            {% endif %}
+
+            <div class="text-center">
+                <button class="btn btn-warning" type="submit">Add File</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

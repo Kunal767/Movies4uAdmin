@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mainselect">
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="mainhead">Edit Content</h2>
+        </div>
+
+        <form action="/savecontent/{{ cid }}" method="POST" class="addform">
+            {% if fileadded == True %}
+
+            <div class="form-group add-form-object">
+                <label for="contentName">Content Name</label>
+                <input type="text" class="form-control" id="contentName" name="contenttitle"
+                    value="{{ temp_content.ctitle }}" placeholder="Movie/Web Series Title">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="imgUrl">Image Link</label>
+                <input type="text" class="form-control" id="imgUrl" name="imgurl" value="{{ temp_content.imgurl }}"
+                    placeholder="Image Url">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="5" name="description" placeholder="Description">{{ temp_content.desc }}</textarea>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="releaseyear">Release Year</label>
+                <input type="text" class="form-control" id="releaseyear" name="releaseyear"
+                    placeholder="Release Year" value="{{ temp_content.ryear }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="duration">Content Duration</label>
+                <input type="text" class="form-control" id="duration" name="duration"
+                    placeholder="Duration" value="{{ temp_content.duration }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="language">Content Language</label>
+                <select class="form-control" id="language" name="language">
+                    {% if temp_content.lang == "Hindi-English Dual Audio" %}
+                    <option value="Hindi-English Dual Audio" selected>Hindi-English Dual Audio</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                    {% elif temp_content.lang == "Hindi" %}
+                    <option value="Hindi-English Dual Audio">Hindi-English Dual Audio</option>
+                    <option value="Hindi" selected>Hindi</option>
+                    <option value="English">English</option>
+                    {% elif temp_content.lang == "English" %}
+                    <option value="Hindi-English Dual Audio">Hindi-English Dual Audio</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English" selected>English</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category">
+                    {% if temp_content.category == "Movie" %}
+                    <option value="Movie" selected>Movie</option>
+                    <option value="Web Series">Web Series</option>
+                    {% elif temp_content.category == "Web Series" %}
+                    <option value="Movie">Movie</option>
+                    <option value="Web Series" selected>Web Series</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="subtitles">Subtitles</label>
+                <select class="form-control" id="subtitles" name="subtitles">
+                    {% if temp_content.subt == "English" %}
+                    <option value="English" selected>English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="No">No</option>
+                    {% elif temp_content.subt == "Hindi" %}
+                    <option value="English">English</option>
+                    <option value="Hindi" selected>Hindi</option>
+                    <option value="No">No</option>
+                    {% elif temp_content.subt == "No" %}
+                    <option value="English">English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="No" selected>No</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="format">Format</label>
+                <select class="form-control" id="format" name="format">
+                    {% if temp_content.fmat == "mkv" %}
+                    <option value="mkv" selected>mkv</option>
+                    <option value="mp4">mp4</option>
+                    <option value="mpeg">mpeg</option>
+                    {% elif temp_content.fmat == "mp4" %}
+                    <option value="mkv">mkv</option>
+                    <option value="mp4" selected>mp4</option>
+                    <option value="mpeg">mpeg</option>
+                    {% elif temp_content.fmat == "mpeg" %}
+                    <option value="mkv">mkv</option>
+                    <option value="mp4">mp4</option>
+                    <option value="mpeg" selected>mpeg</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            {% else %}
+
+            <div class="form-group add-form-object">
+                <label for="contentName">Content Name</label>
+                <input type="text" class="form-control" id="contentName" name="contenttitle"
+                    placeholder="Movie/Web Series Title" value="{{ content.movieName }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="imgUrl">Image Link</label>
+                <input type="text" class="form-control" id="imgUrl" name="imgurl" placeholder="Image Url" value="{{ content.imgUrl }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="5" name="description" placeholder="Description">{{ content.description }}</textarea>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="releaseyear">Release Year</label>
+                <input type="text" class="form-control" id="releaseyear" name="releaseyear"
+                    placeholder="Release Year" value="{{ ryear }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="duration">Content Duration</label>
+                <input type="text" class="form-control" id="duration" name="duration"
+                    placeholder="Duration" value="{{ content.movieInfo.Duration }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="language">Content Language</label>
+                <select class="form-control" id="language" name="language">
+                    {% if content.movieInfo.Language == "Hindi-English Dual Audio" %}
+                    <option value="Hindi-English Dual Audio" selected>Hindi-English Dual Audio</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                    {% elif content.movieInfo.Language == "Hindi" %}
+                    <option value="Hindi-English Dual Audio">Hindi-English Dual Audio</option>
+                    <option value="Hindi" selected>Hindi</option>
+                    <option value="English">English</option>
+                    {% elif content.movieInfo.Language == "English" %}
+                    <option value="Hindi-English Dual Audio">Hindi-English Dual Audio</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English" selected>English</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category">
+                    {% if content.movieInfo.Category == "Movie" %}
+                    <option value="Movie" selected>Movie</option>
+                    <option value="Web Series">Web Series</option>
+                    {% elif content.movieInfo.Category == "Web Series" %}
+                    <option value="Movie">Movie</option>
+                    <option value="Web Series" selected>Web Series</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="subtitles">Subtitles</label>
+                <select class="form-control" id="subtitles" name="subtitles">
+                    {% if content.movieInfo.Subtitles == "English" %}
+                    <option value="English" selected>English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="No">No</option>
+                    {% elif content.movieInfo.Subtitles == "Hindi" %}
+                    <option value="English">English</option>
+                    <option value="Hindi" selected>Hindi</option>
+                    <option value="No">No</option>
+                    {% elif content.movieInfo.Subtitles == "No" %}
+                    <option value="English">English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="No" selected>No</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group add-form-object">
+                <label for="format">Format</label>
+                <select class="form-control" id="format" name="format">
+                    {% if content.movieInfo.Format == "Mkv" or content.movieInfo.Format == "mkv" %}
+                    <option value="mkv" selected>mkv</option>
+                    <option value="mp4">mp4</option>
+                    <option value="mpeg">mpeg</option>
+                    {% elif content.movieInfo.Format == "Mp4" or content.movieInfo.Format == "mp4" %}
+                    <option value="mkv">mkv</option>
+                    <option value="mp4" selected>mp4</option>
+                    <option value="mpeg">mpeg</option>
+                    {% elif content.movieInfo.Format == "Mpeg" or content.movieInfo.Format == "mpeg" %}
+                    <option value="mkv">mkv</option>
+                    <option value="mp4">mp4</option>
+                    <option value="mpeg" selected>mpeg</option>
+                    {% endif %}
+                </select>
+            </div>
+
+
+            {% endif %}
+
+            <div class="form-group add-form-object">
+                <label for="fileUrl">File's</label>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Link Text</th>
+                            <th scope="col">Download Text</th>
+                            <th scope="col">Download Link</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for id, details in fileurls.items() %}
+                        <tr>
+                            <th scope="row">{{ id }}</th>
+                            <td class="dtext">{{ details.linkSpec }}</td>
+                            <td>{{ details.downloadText }}</td>
+                            <td>{{ details.downloadLink[0:50] }}...</td>
+                            <td><a href="/editfileurl/{{ id }}" class="btn btn-outline-success" onclick="saveEditContentData();">Edit File</a></td>
+                            <td><a href="/deletefileurl/{{ id }}" class="btn btn-outline-danger" onclick="saveEditContentData();">Delete File</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="addbtn float-end">
+                    <a href="/addfileurl" class="btn btn-primary" onclick="saveEditContentData();"><i
+                            class="fa fa-plus-circle"></i> Add File</a>
+                </div>
+                <div class="addbtn float-end">
+                    <a href="/discardedit" class="btn btn-warning">Discard Changes</a>
+                </div>
+            </div>
+            <div class="submitbtn">
+                <button class="btn btn-outline-dark" type="submit">Save Content</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
