@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mainselect">
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="mainhead">Change Updater</h2>
+        </div>
+
+        <form action="/changedupdater" method="POST" class="addform">
+
+            <div class="form-group add-form-object">
+                <label for="updateVersion">Update Available</label>
+                <input type="text" class="form-control" id="updateVersion" value="{{ update_data.updateVersion }}" name="updateVersion"
+                    placeholder="Update Available">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="updateLink">Update Link</label>
+                <input type="text" class="form-control" id="updateLink" name="updateLink"
+                    value="{{ update_data.updateLink }}" placeholder="Update Link">
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-warning" type="submit">Update</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

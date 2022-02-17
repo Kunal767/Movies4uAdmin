@@ -23,6 +23,10 @@
                     placeholder="Image Url">
             </div>
             <div class="form-group add-form-object">
+                <label for="htdurl">How to Download Video Link</label>
+                <input type="text" class="form-control" id="htdurl" name="htdurl" placeholder="Tutorial Url" value="{{ temp_content.htdurl }}">
+            </div>
+            <div class="form-group add-form-object">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" rows="5" name="description" placeholder="Description">{{ temp_content.desc }}</textarea>
             </div>
@@ -113,6 +117,10 @@
             <div class="form-group add-form-object">
                 <label for="imgUrl">Image Link</label>
                 <input type="text" class="form-control" id="imgUrl" name="imgurl" placeholder="Image Url" value="{{ content.imgUrl }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="htdurl">How to Download Video Link</label>
+                <input type="text" class="form-control" id="htdurl" name="htdurl" placeholder="Tutorial Url" value="{{ content.htd }}">
             </div>
             <div class="form-group add-form-object">
                 <label for="description">Description</label>

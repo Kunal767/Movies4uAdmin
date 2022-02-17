@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mainselect">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="mainhead">Edit {{ type }}</h2>
+        </div>
+
+        <form action="/save{{ urltype }}/{{ id }}" method="POST" class="addform">
+
+            <div class="form-group add-form-object">
+                <label for="contentId">Content ID</label>
+                <input type="text" class="form-control" id="contentId" name="contentId" placeholder="ID" value="{{ id }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="contentName">Content Name</label>
+                <input type="text" class="form-control" id="contentName" name="contenttitle"
+                    placeholder="Movie/Web Series Title" value="{{ content.movieName }}">
+            </div>
+            <div class="form-group add-form-object">
+                <label for="imgUrl">Image Link</label>
+                <input type="text" class="form-control" id="imgUrl" name="imgurl" placeholder="Image Url" value="{{ content.imgUrl }}">
+            </div>
+
+            <div class="submitbtn">
+                <button class="btn btn-outline-dark" type="submit">Save {{ type }}</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

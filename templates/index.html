@@ -6,6 +6,311 @@
 <div class="mainselect">
     <div class="container">
 
+        <div class="text-center">
+            <ul class="nav nav-tabs justify-content-center">
+                {% if banner_home == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trending-content">Trending Content</a>
+                </li>
+                {% elif banner_movies == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trending-content">Trending Content</a>
+                </li>
+                {% elif banner_series == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trending-content">Trending Content</a>
+                </li>
+                {% elif latest_content == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trending-content">Trending Content</a>
+                </li>
+                {% elif popular_content == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trending-content">Trending Content</a>
+                </li>
+                {% elif trending_content == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/trending-content">Trending Content</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">All Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-home">Banner Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-movies">Banner Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/banner-series">Banner Web Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/latest-content">Latest Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/popular-content">Popular Content</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trending-content">Trending Content</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="addbtn float-start">
+            <button class="btn btn-outline-info"><a href="/change-updater"><i class="fas fa-exchange-alt"></i> Change
+                    Updater</a></button>
+        </div>
+
+        {% if banner_home == True %}
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Banner Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit Banner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Banner Image"></td>
+                    <td><a href="/editbannerhome/{{ id }}" class="btn btn-outline-info">Edit Banner</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% elif banner_movies == True %}
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Banner Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit Banner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Banner Image"></td>
+                    <td><a href="/editbannermovies/{{ id }}" class="btn btn-outline-info">Edit Banner</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% elif banner_series == True %}
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Banner Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit Banner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Banner Image"></td>
+                    <td><a href="/editbannerseries/{{ id }}" class="btn btn-outline-info">Edit Banner</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% elif latest_content == True %}
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Content Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Banner Image"></td>
+                    <td><a href="/editlatestcontent/{{ id }}" class="btn btn-outline-info">Edit Content</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% elif popular_content == True %}
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Content Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Banner Image"></td>
+                    <td><a href="/editpopularcontent/{{ id }}" class="btn btn-outline-info">Edit Content</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% elif trending_content == True %}
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Content Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, details in contents.items() %}
+                <tr>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ details.movieName }}</td>
+                    <td><img src="{{ details.imgUrl }}" width="120" height="67.5" alt="Banner Image"></td>
+                    <td><a href="/edittrendingcontent/{{ id }}" class="btn btn-outline-info">Edit Content</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+
         <div class="addbtn float-end">
             <button class="btn btn-outline-success"><a href="/add-content"><i class="fa fa-plus-circle"></i> Add
                     Content</a></button>
@@ -59,6 +364,8 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% endif %}
 
     </div>
 </div>
