@@ -1,3 +1,4 @@
+from importlib.resources import contents
 from flask import Flask, redirect, request, session, url_for
 from flask.templating import render_template
 import json
@@ -96,6 +97,24 @@ def fileadded_read():
         fileadded_response = fileadded_file.read()
     return fileadded_response
 
+@app.route("/change-updater")
+def change_updater():
+    database = read_db()
+    update_data = database['updateCheck']
+    return render_template("changeupdater.html", update_data=update_data)
+
+@app.route("/changedupdater", methods=["GET", "POST"])
+def changedupdater():
+    if request.method == "POST":
+        database = read_db()
+        update_data = database['updateCheck']
+        updateVersion = request.form['updateVersion']
+        updateLink = request.form['updateLink']
+        update_data['updateVersion'] = updateVersion
+        update_data['updateLink'] = updateLink
+        write_db(database)
+        return redirect(url_for('home'))
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     session.pop('previousurl', None)
@@ -103,12 +122,199 @@ def home():
     all_content = database['allcontent']
     return render_template("index.html", contents=all_content)
 
+@app.route("/banner-home", methods=["GET", "POST"])
+def banner_home():
+    session.pop('previousurl', None)
+    database = read_db()
+    banner_home_contents = database['banners']['home']
+    return render_template("index.html", contents=banner_home_contents, banner_home=True)
+
+@app.route("/banner-movies", methods=["GET", "POST"])
+def banner_movies():
+    session.pop('previousurl', None)
+    database = read_db()
+    banner_movies_contents = database['banners']['movies']
+    return render_template("index.html", contents=banner_movies_contents, banner_movies=True)
+
+@app.route("/banner-series", methods=["GET", "POST"])
+def banner_series():
+    session.pop('previousurl', None)
+    database = read_db()
+    banner_series_contents = database['banners']['webSeries']
+    return render_template("index.html", contents=banner_series_contents, banner_series=True)
+
+@app.route("/latest-content", methods=["GET", "POST"])
+def latest_content():
+    session.pop('previousurl', None)
+    database = read_db()
+    latest_contents = database['contents']['latest']
+    return render_template("index.html", contents=latest_contents, latest_content=True)
+
+@app.route("/popular-content", methods=["GET", "POST"])
+def popular_content():
+    session.pop('previousurl', None)
+    database = read_db()
+    popular_contents = database['contents']['popular']
+    return render_template("index.html", contents=popular_contents, popular_content=True)
+
+@app.route("/trending-content", methods=["GET", "POST"])
+def trending_content():
+    session.pop('previousurl', None)
+    database = read_db()
+    trending_contents = database['contents']['trending']
+    return render_template("index.html", contents=trending_contents, trending_content=True)
+
+@app.route("/editbannerhome/<string:id>", methods=["GET", "POST"])
+def editbannerhome(id):
+    database = read_db()
+    banners_home = database['banners']['home']
+    for key, cntents in banners_home.items():
+        if str(key) == str(id):
+            return render_template("editstatic.html", content=cntents, type="Banner", urltype="bannerhome", id=key)
+
+@app.route("/editbannermovies/<string:id>", methods=["GET", "POST"])
+def editbannermovies(id):
+    database = read_db()
+    banners_movies = database['banners']['movies']
+    for key, cntents in banners_movies.items():
+        if str(key) == str(id):
+            return render_template("editstatic.html", content=cntents, type="Banner", urltype="bannermovies", id=key)
+
+@app.route("/editbannerseries/<string:id>", methods=["GET", "POST"])
+def editbannerseries(id):
+    database = read_db()
+    banners_series = database['banners']['webSeries']
+    for key, cntents in banners_series.items():
+        if str(key) == str(id):
+            return render_template("editstatic.html", content=cntents, type="Banner", urltype="bannerseries", id=key)
+
+@app.route("/editlatestcontent/<string:id>", methods=["GET", "POST"])
+def editlatestcontent(id):
+    database = read_db()
+    latest_contents = database['contents']['latest']
+    for key, cntents in latest_contents.items():
+        if str(key) == str(id):
+            return render_template("editstatic.html", content=cntents, type="Content", urltype="latestcontent", id=key)
+
+@app.route("/editpopularcontent/<string:id>", methods=["GET", "POST"])
+def editpopularcontent(id):
+    database = read_db()
+    popular_contents = database['contents']['popular']
+    for key, cntents in popular_contents.items():
+        if str(key) == str(id):
+            return render_template("editstatic.html", content=cntents, type="Content", urltype="popularcontent", id=key)
+
+@app.route("/edittrendingcontent/<string:id>", methods=["GET", "POST"])
+def edittrendingcontent(id):
+    database = read_db()
+    trending_contents = database['contents']['trending']
+    for key, cntents in trending_contents.items():
+        if str(key) == str(id):
+            return render_template("editstatic.html", content=cntents, type="Content", urltype="trendingcontent", id=key)
+
+@app.route("/savebannerhome/<string:id>", methods=["GET", "POST"])
+def savebannerhome(id):
+    content_id = request.form['contentId']
+    contentTitle = request.form['contenttitle']
+    imgurl = request.form['imgurl']
+
+    database = read_db()
+    identifer = database['banners']['home']
+    identifer.pop(id, None)
+    identifer[content_id] = {
+        "imgUrl": imgurl,
+        "movieName": contentTitle
+    }
+    write_db(database)
+    return redirect(url_for('banner_home'))
+    
+@app.route("/savebannermovies/<string:id>", methods=["GET", "POST"])
+def savebannermovies(id):
+    content_id = request.form['contentId']
+    contentTitle = request.form['contenttitle']
+    imgurl = request.form['imgurl']
+
+    database = read_db()
+    identifer = database['banners']['movies']
+    identifer.pop(id, None)
+    identifer[content_id] = {
+        "imgUrl": imgurl,
+        "movieName": contentTitle
+    }
+    write_db(database)
+    return redirect(url_for('banner_movies'))
+
+@app.route("/savebannerseries/<string:id>", methods=["GET", "POST"])
+def savebannerseries(id):
+    content_id = request.form['contentId']
+    contentTitle = request.form['contenttitle']
+    imgurl = request.form['imgurl']
+
+    database = read_db()
+    identifer = database['banners']['webSeries']
+    identifer.pop(id, None)
+    identifer[content_id] = {
+        "imgUrl": imgurl,
+        "movieName": contentTitle
+    }
+    write_db(database)
+    return redirect(url_for('banner_series'))
+
+@app.route("/savelatestcontent/<string:id>", methods=["GET", "POST"])
+def savelatestcontent(id):
+    content_id = request.form['contentId']
+    contentTitle = request.form['contenttitle']
+    imgurl = request.form['imgurl']
+
+    database = read_db()
+    identifer = database['contents']['latest']
+    identifer.pop(id, None)
+    identifer[content_id] = {
+        "imgUrl": imgurl,
+        "movieName": contentTitle
+    }
+    write_db(database)
+    return redirect(url_for('latest_content'))
+
+@app.route("/savepopularcontent/<string:id>", methods=["GET", "POST"])
+def savepopularcontent(id):
+    content_id = request.form['contentId']
+    contentTitle = request.form['contenttitle']
+    imgurl = request.form['imgurl']
+
+    database = read_db()
+    identifer = database['contents']['popular']
+    identifer.pop(id, None)
+    identifer[content_id] = {
+        "imgUrl": imgurl,
+        "movieName": contentTitle
+    }
+    write_db(database)
+    return redirect(url_for('popular_content'))
+
+@app.route("/savetrendingcontent/<string:id>", methods=["GET", "POST"])
+def savetrendingcontent(id):
+    content_id = request.form['contentId']
+    contentTitle = request.form['contenttitle']
+    imgurl = request.form['imgurl']
+
+    database = read_db()
+    identifer = database['contents']['trending']
+    identifer.pop(id, None)
+    identifer[content_id] = {
+        "imgUrl": imgurl,
+        "movieName": contentTitle
+    }
+    write_db(database)
+    return redirect(url_for('trending_content'))
+
 @app.route("/savetempcontent", methods=["GET", "POST"])
 def savetempcontent():
     if request.method == "POST":
         data = {}
         data['ctitle'] = request.json['ctitle']
         data['imgurl'] = request.json['imgurl']
+        data['htdurl'] = request.json['htdurl']
         data['lang'] = request.json['lang']
         data['category'] = request.json['category']
         data['subt'] = request.json['subt']
@@ -122,6 +328,7 @@ def saveedittempcontent():
         data = {}
         data['ctitle'] = request.json['ctitle']
         data['imgurl'] = request.json['imgurl']
+        data['htdurl'] = request.json['htdurl']
         data['desc'] = request.json['desc']
         data['lang'] = request.json['lang']
         data['ryear'] = request.json['ryear']
@@ -196,6 +403,7 @@ def addcontent():
     if request.method == "POST":
         contenttitle = request.form['contenttitle']
         imgurl = request.form['imgurl']
+        htdurl = request.form['htdurl']
         language = request.form['language']
         category = request.form['category']
         subtitles = request.form['subtitles']
@@ -220,7 +428,8 @@ def addcontent():
             "fileUrl": file_urls['fileUrls'],
             "imgUrl": imgurl,
             "movieName": contenttitle,
-            "description": fetch_wiki(contenttitle)
+            "description": fetch_wiki(contenttitle),
+            "htd": htdurl
         }
         write_db(database)
         new_temp_data = {}
@@ -259,6 +468,7 @@ def savecontent(content_id):
     if request.method == "POST":
         contenttitle = request.form['contenttitle']
         imgurl = request.form['imgurl']
+        htdurl = request.form['htdurl']
         description = request.form['description']
         releaseyear = request.form['releaseyear']
         duration = request.form['duration']
@@ -280,7 +490,8 @@ def savecontent(content_id):
             "fileUrl": fileurls['fileUrls'],
             "imgUrl": imgurl,
             "movieName": contenttitle,
-            "description": description
+            "description": description,
+            "htd": htdurl
         }
         write_db(database)
         new_temp_data = {}
